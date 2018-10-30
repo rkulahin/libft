@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 14:30:41 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/26 17:17:32 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/28 11:59:15 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/28 13:20:56 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *str1, const char *str2, size_t n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned char	*a1;
-	unsigned char	*a2;
-	size_t			i;
+	char *ptr;
 
-	i = 0;
-	a1 = (unsigned char *)str1;
-	a2 = (unsigned char *)str2;
-	if (*(a1 + i) == '\0' || *(a2 + i) == '\0')
-		return (*(a1 + i) - *(a2 + i));
-	while ((*(a1 + i) != '\0' && *(a2 + i) != '\0') && i < n)
+	if (s1 && s2)
 	{
-		if (*(a1 + i) != *(a2 + i))
-			return (*(a1 + i) - *(a2 + i));
-		i++;
+		ptr = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
+		if (ptr)
+		{
+			ptr = ft_strcpy(ptr, s1);
+			ptr = ft_strcat(ptr, s2);
+		}
+		return (ptr);
 	}
-	return (0);
+	return (NULL);
 }

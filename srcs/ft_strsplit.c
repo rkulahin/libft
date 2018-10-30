@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 14:30:41 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/26 17:17:32 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/28 16:23:44 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/29 13:22:28 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *str1, const char *str2, size_t n)
+char		**ft_strsplit(char const *s, char c)
 {
-	unsigned char	*a1;
-	unsigned char	*a2;
-	size_t			i;
+	int		i;
+	int		j;
+	int		k;
+	char	**ptr;
 
+	if (!s || !(ptr = (char **)malloc((ft_cwords(s, c) + 1) * sizeof(*ptr))))
+		return (NULL);
 	i = 0;
-	a1 = (unsigned char *)str1;
-	a2 = (unsigned char *)str2;
-	if (*(a1 + i) == '\0' || *(a2 + i) == '\0')
-		return (*(a1 + i) - *(a2 + i));
-	while ((*(a1 + i) != '\0' && *(a2 + i) != '\0') && i < n)
+	j = 0;
+	while (i < ft_cwords(s, c))
 	{
-		if (*(a1 + i) != *(a2 + i))
-			return (*(a1 + i) - *(a2 + i));
+		k = 0;
+		if (!(ptr[i] = ft_strnew(ft_lenword(&s[j], c) + 1)))
+			ptr[i] = NULL;
+		while (s[j] == c)
+			j++;
+		while (s[j] != c && s[j])
+			ptr[i][k++] = s[j++];
+		ptr[i][k] = '\0';
 		i++;
 	}
-	return (0);
+	ptr[i] = 0;
+	return (ptr);
 }

@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 14:30:41 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/26 17:17:32 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/29 17:37:18 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/29 18:15:35 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *str1, const char *str2, size_t n)
+t_list		*ft_lstnew(void const *content, size_t content_size)
 {
-	unsigned char	*a1;
-	unsigned char	*a2;
-	size_t			i;
+	t_list	*list;
 
-	i = 0;
-	a1 = (unsigned char *)str1;
-	a2 = (unsigned char *)str2;
-	if (*(a1 + i) == '\0' || *(a2 + i) == '\0')
-		return (*(a1 + i) - *(a2 + i));
-	while ((*(a1 + i) != '\0' && *(a2 + i) != '\0') && i < n)
+	if ((list = malloc(sizeof(t_list))))
 	{
-		if (*(a1 + i) != *(a2 + i))
-			return (*(a1 + i) - *(a2 + i));
-		i++;
+		list->next = NULL;
+		if (content == NULL)
+		{
+			list->content = NULL;
+			list->content_size = 0;
+		}
+		else
+		{
+			list->content = malloc(content_size);
+			list->content_size = content_size;
+			list->content = ft_strncpy(list->content, content, content_size);
+		}
+		return (list);
 	}
-	return (0);
+	return (NULL);
 }

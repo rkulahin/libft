@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 14:30:41 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/26 17:17:32 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/28 12:28:26 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/29 13:23:38 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *str1, const char *str2, size_t n)
+char	*ft_strtrim(char const *s)
 {
-	unsigned char	*a1;
-	unsigned char	*a2;
-	size_t			i;
+	size_t	st;
+	size_t	e;
+	char	*ptr;
 
-	i = 0;
-	a1 = (unsigned char *)str1;
-	a2 = (unsigned char *)str2;
-	if (*(a1 + i) == '\0' || *(a2 + i) == '\0')
-		return (*(a1 + i) - *(a2 + i));
-	while ((*(a1 + i) != '\0' && *(a2 + i) != '\0') && i < n)
+	st = 0;
+	if (s)
 	{
-		if (*(a1 + i) != *(a2 + i))
-			return (*(a1 + i) - *(a2 + i));
-		i++;
+		e = ft_strlen(s) - 1;
+		while (s[st] == ' ' || s[st] == '\t' || s[st] == '\n')
+			st++;
+		if (s[st] == '\0')
+		{
+			ptr = ft_strnew(1);
+			return ((char *)ptr);
+		}
+		while (s[e] == ' ' || s[e] == '\t' || s[e] == '\n')
+			e--;
+		ptr = ft_strnew(e - st);
+		if (ptr)
+			ptr = ft_strsub(s, st, e - st + 1);
+		return (ptr);
 	}
-	return (0);
+	return (NULL);
 }

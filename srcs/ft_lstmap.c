@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 14:30:41 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/26 17:17:32 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/30 08:29:17 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/30 15:36:16 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *str1, const char *str2, size_t n)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	unsigned char	*a1;
-	unsigned char	*a2;
-	size_t			i;
+	t_list	*node;
+	t_list	*tmp;
 
-	i = 0;
-	a1 = (unsigned char *)str1;
-	a2 = (unsigned char *)str2;
-	if (*(a1 + i) == '\0' || *(a2 + i) == '\0')
-		return (*(a1 + i) - *(a2 + i));
-	while ((*(a1 + i) != '\0' && *(a2 + i) != '\0') && i < n)
+	if (!(node = malloc(sizeof(t_list))) || !lst || !f)
+		return (NULL);
+	node = f(lst);
+	tmp = node;
+	while (lst)
 	{
-		if (*(a1 + i) != *(a2 + i))
-			return (*(a1 + i) - *(a2 + i));
-		i++;
+		node->next = f(lst->next);
+		lst = lst->next;
+		node = node->next;
 	}
-	return (0);
+	return (tmp);
 }
