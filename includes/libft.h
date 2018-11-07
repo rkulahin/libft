@@ -68,6 +68,7 @@ void				ft_putnbr(int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
+void				ft_putnbr_fd(int n, int fd);
 int					ft_cnumbers(int n);
 int					ft_cwords(char const *str, char c);
 int					ft_lenword(char const *s, char c);
@@ -83,4 +84,13 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstadd(t_list **alst, t_list *new);
+typedef	struct		s_btree
+{
+	struct s_btree	*left;
+	struct s_btree	*right;
+	void			*item;
+}					t_btree;
+t_btree				*btree_create_node (void *item);
+int					ft_isupper (char c);
+int					ft_islower (char c);
 #endif

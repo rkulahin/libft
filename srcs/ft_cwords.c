@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_cwords.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 13:14:08 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/29 13:18:58 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/29 17:10:09 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/31 09:01:00 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int		ft_cwords(char const *str, char c)
 {
-	if (fd < 0)
-		return ;
-	if (n < -9 || n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	if (n < 0)
+	int count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (str[i])
 	{
-		if (n >= -9)
-			ft_putchar_fd('-', fd);
-		ft_putchar_fd('0' - (n % 10), fd);
+		while (str[i] == c)
+			i++;
+		if (str[i] != c && str[i] != '\0')
+			count++;
+		while (str[i] != c && str[i] != '\0')
+			i++;
 	}
-	else
-		ft_putchar_fd('0' + (n % 10), fd);
+	if (count == (int)ft_strlen(str) - 1)
+		count = 1;
+	return ((int)count);
 }

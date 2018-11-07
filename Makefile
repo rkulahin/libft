@@ -11,14 +11,13 @@
 #******************************************************************************#
 
 NAME=libft.a
-SRCS=srcs/*.c
+SRCS=*.c
 OBJECTS=*.o
-HEADERS_FOLDER=includes/
 
 all: $(NAME)
 
 $(NAME):
-	gcc -I$(HEADERS_FOLDER) -c $(SRCS) -Wall -Wextra -Werror
+	gcc -I . -c $(SRCS) -Wall -Wextra -Werror
 	ar -rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 

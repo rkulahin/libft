@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 10:22:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/26 10:39:47 by rkulahin         ###   ########.fr       */
+/*   Updated: 2018/10/30 20:30:42 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 char	*ft_strchr(const char *str, int ch)
 {
-	size_t i;
+	char *ptr;
 
-	i = 0;
-	while (*(str + i))
+	ptr = (char *)str;
+	while (*ptr != ch)
 	{
-		if (*(str + i) == ch)
-			return ((char *)str + i);
-		else if (*(str + i + 1) == ch)
-			return ((char *)str + i + 1);
-		i++;
+		if (*ptr == '\0')
+			return (NULL);
+		ptr++;
 	}
-	return (NULL);
+	return (ptr);
 }

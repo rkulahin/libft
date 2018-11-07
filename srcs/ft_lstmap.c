@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 08:29:17 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/30 15:36:16 by rkulahin         ###   ########.fr       */
+/*   Updated: 2018/10/30 18:27:00 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 		return (NULL);
 	node = f(lst);
 	tmp = node;
-	while (lst)
+	while (lst->next)
 	{
+		node->next = malloc(sizeof(t_list));
 		node->next = f(lst->next);
 		lst = lst->next;
 		node = node->next;

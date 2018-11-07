@@ -1,29 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 13:14:08 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/29 13:18:58 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/10/29 09:01:36 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/10/29 13:33:01 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static void	ifneg(int *n, int *m, int *l)
 {
-	if (fd < 0)
-		return ;
-	if (n < -9 || n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	if (n < 0)
+	if (*n < 0)
 	{
-		if (n >= -9)
-			ft_putchar_fd('-', fd);
-		ft_putchar_fd('0' - (n % 10), fd);
+		*m = -1;
+		(*l)++;
 	}
-	else
-		ft_putchar_fd('0' + (n % 10), fd);
+}
+
+char		*ft_itoa(int n)
+{
+	char	*str;
+	int		m;
+	int		l;
+
+	m = 1;
+	l = ft_cnumbers(n);
+	if (n == 0)
+	{
+		str = ft_strnew(1);
+		str[0] = '0';
+		return (str);
+	}
+	ifneg(&n, &m, &l);
+	if ((str = ft_strnew(l)))
+	{
+		if (m == -1)
+			str[0] = '-';
+		while (n != 0)
+		{
+			*(str + --l) = (n % 10) * m + '0';
+			n = n / 10;
+		}
+	}
+	return (str);
 }

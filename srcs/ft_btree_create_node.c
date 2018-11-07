@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   btree_create_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 13:14:08 by rkulahin          #+#    #+#             */
-/*   Updated: 2018/10/29 13:18:58 by rkulahin         ###   ########.fr       */
+/*   Created: 2018/11/05 18:13:22 by rkulahin          #+#    #+#             */
+/*   Updated: 2018/11/05 18:13:23 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+t_btree	*ft_btree_create_node(void *item)
 {
-	if (fd < 0)
-		return ;
-	if (n < -9 || n > 9)
-		ft_putnbr_fd(n / 10, fd);
-	if (n < 0)
-	{
-		if (n >= -9)
-			ft_putchar_fd('-', fd);
-		ft_putchar_fd('0' - (n % 10), fd);
-	}
-	else
-		ft_putchar_fd('0' + (n % 10), fd);
+	t_btree *node;
+
+	if (!(node = malloc(sizeof(node))))
+		return (NULL);
+	node->item = item;
+	node->left = 0;
+	node->right = 0;
+	return (node);
 }
