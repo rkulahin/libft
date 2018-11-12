@@ -28,9 +28,3 @@ fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
-
-main: re
-	/bin/rm -f *.o
-	gcc -L. -lft main.c
-	find * -type f -name "*~" -delete -o -type f -name "#*#" -delete
-	./a.out
